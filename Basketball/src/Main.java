@@ -40,8 +40,9 @@ public class Main {
 
                 break;
             case "tp":
+
                 for(int i=0; i<pLength; i++) {
-                    if(players[i][1] == args[1] && players[i][2] == args[2]) { //player team == YYY && player position == ZZZ
+                    if(players[i][1].equals(args[1]) && players[i][2].equals(args[2])) { //player team == YYY && player position == ZZZ
                         System.out.println(players[i][0] + " " + players[i][1] + " " + players[i][2]);
                     }
                 }
