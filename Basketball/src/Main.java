@@ -21,29 +21,32 @@ public class Main {
                 {"Jonas Maciulis", "AEK", "Lengvasis krastas"},
                 {"Mindaugas Kuzminskas", "Lokomotiv-Kuban", "Lengvasis krastas"}
         };
-        int pLength = players.length;
+//        int pLength = players.length;
         switch (param) {
             case "n":
-                for (int i=0; i<pLength; i++) { //player name == XXX
-                    if(players[i][0].equals(args[1])) {
-                        System.out.println(players[i][0] + " " + players[i][1] + " " + players[i][2]);
-                        break;
+                for (String[] player : players) { // basically players.forEach( player => {...
+                    if (player[0].equals(args[1])) { //player name == XXX
+                        System.out.println(player[0] + " " + player[1] + " " + player[2]);
                     }
                 }
                 break;
+//for (int i=0; i<pLength; i++) {
+//    if(players[i][0].equals(args[1])) {
+//        System.out.println(players[i][0] + " " + players[i][1] + " " + players[i][2]);
+//        break;
+//    }
+//}
             case "t":
-                for(int i=0; i<pLength; i++) {
-                    if(players[i][1].equals(args[1])) { //player team == YYY
-                        System.out.println(players[i][0] + " " + players[i][1] + " " + players[i][2]);
+                for(String[] player : players) {
+                    if(player[1].equals(args[1])) { //player team == YYY
+                        System.out.println(player[0] + " " + player[1] + " " + player[2]);
                     }
                 }
-
                 break;
             case "tp":
-
-                for(int i=0; i<pLength; i++) {
-                    if(players[i][1].equals(args[1]) && players[i][2].equals(args[2])) { //player team == YYY && player position == ZZZ
-                        System.out.println(players[i][0] + " " + players[i][1] + " " + players[i][2]);
+                for(String[] player : players) {
+                    if(player[1].equals(args[1]) && player[2].equals(args[2])) { //player team == YYY && player position == ZZZ
+                        System.out.println(player[0] + " " + player[1] + " " + player[2]);
                     }
                 }
                 break;
@@ -51,7 +54,5 @@ public class Main {
                 System.out.println("invalid param");
                 break;
         }
-
-
     }
 }
