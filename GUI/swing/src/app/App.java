@@ -11,14 +11,16 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Insets;
 
 public class App {
-    private static void append(String text, JTextArea textArea, JTextField textField) { //function to append text to textArea
+    private static void append(String text, JTextArea textArea, JTextField textField) { // function to append text to
+                                                                                        // textArea
         DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-        if(!text.isBlank()) { //if not empty
+        if (!text.isBlank()) { // if not empty
             Date date = new Date();
-        
+
             textArea.append(dateFormat.format(date) + ": " + text + "\n");
             textField.setText("");
         } else {
@@ -28,23 +30,44 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); //use windows UI
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); // use windows UI
 
         Font font = new Font("Roboto", Font.PLAIN, 20);
 
         JFrame frame = new JFrame("title");
 
         frame.setSize(600, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //close process when window closes
-        
-        JButton button = new JButton("click me or press ENTER");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // close process when window closes
+
+        JButton button = new JButton("Add message");
+
+        //button.setPreferredSize(new Dimension(300, 80)); don't need because subPanel has preferredSize
 
         button.setBackground(Color.decode("#4385f5"));
-        button.setForeground(Color.WHITE); //text color
-        button.setBorder(null); //no ugly white border
-        button.setPreferredSize(new Dimension(500, 80)); //width 500, height 80
-        button.setFocusPainted(false); //remove dotted-border on click
+        button.setForeground(Color.WHITE); // text color
+        button.setBorder(null); // no ugly white border
+        button.setFocusPainted(false); // remove dotted-border on click
         button.setFont(font);
+
+        JButton button2 = new JButton("Clear");
+
+        //button2.setPreferredSize(new Dimension(300, 80)); don't need because subPanel has preferredSize
+
+        button2.setBackground(Color.decode("#f58543"));
+        button2.setForeground(Color.WHITE); // text color
+        button2.setBorder(null); // no ugly white border
+        button2.setFocusPainted(false); // remove dotted-border on click
+        button2.setFont(font);
+
+        JPanel subPanel = new JPanel(); // create subPanel to fit 2 elements in one space (BorderLayout.SOUTH) since you
+                                        // can only have 1 element at one border
+
+        subPanel.setLayout(new GridLayout()); //makes the 2 buttons each have 50% of the screen width
+        subPanel.add(button);
+        subPanel.add(button2);
+        subPanel.setBorder(null);
+        subPanel.setBackground(Color.decode("#333333"));
+        subPanel.setPreferredSize(new Dimension(600, 80));
 
         final JTextArea textArea = new JTextArea();
        
@@ -73,6 +96,11 @@ public class App {
             }
 
         });
+        button2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt){
+                textArea.setText("");
+            }
+        });
 
         Action clickBtn = new AbstractAction() { //click button programatically
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +115,9 @@ public class App {
 
         c.add(textField, BorderLayout.NORTH);
         c.add(textArea, BorderLayout.CENTER);
-        c.add(button, BorderLayout.SOUTH);
+        c.add(subPanel, BorderLayout.SOUTH);
+        // c.add(button, BorderLayout.SOUTH);
+        // c.add(button2, BorderLayout.SOUTH);
         
         frame.setVisible(true); //show window
     }
