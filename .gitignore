@@ -1,4 +1,3 @@
-#CLEAN UP THIS MESS, how the hell does .gitignore even function
 out/
 .idea/
 *.class
