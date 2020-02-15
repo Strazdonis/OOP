@@ -1,13 +1,10 @@
-*/out/*
-*/.idea/*
-.idea/*
-/.idea/*
+#CLEAN UP THIS MESS, how the hell does .gitignore even function
+out/
+.idea/
 *.class
 *.iml
-.settings/*
-*/.settings/*
-*/.vscode/*
-.vscode/*
-bin/*
+.settings/
+.vscode/
+bin/
 .classpath
 .project
