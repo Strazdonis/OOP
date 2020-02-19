@@ -5,5 +5,7 @@ public class App {
         System.out.println(chem.chemistry("na", "Carbon"));
         System.out.println(chem.chemistry("s", "K"));
         System.out.println(chem.chemistry("s", "B"));
+        System.out.println("prime divisors of 77:");
+        prime.allPrimeDivisors(77);
     }
 }
