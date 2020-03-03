@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class T {
     public static void main(String[] args) throws Exception {
@@ -67,55 +69,37 @@ public class T {
             {"Lainius", "MedCentre", "10", "1000", "analyst"} 
         };
 
-
-        /*
-
-            THIS IS VERY VERY VERY INNEFICIENT, ARRAYLIST WOULD BE BETTER
-
-        */
-
-        String names[] = new String[data.length];
-        String projs[] = new String[data.length];
-        int diff_ppl=0;
-        int diff_prj=0;
-        boolean dupe_name = false;
-        boolean dupe_proj = false;
-        for(String[] row : data) {
-            dupe_name = false;
-            dupe_proj = false;
-            for(String name : names) {
-                if(name != null && name.equals(row[0])) { //neuzpildyti laukeliai yra null
-                    dupe_name = true;
-                    continue; //no point looping further
-                }
-            }
-            for(String proj : projs) {
-                if(proj != null && proj.equals(row[1])) { //neuzpildyti laukeliai yra null
-                    dupe_proj = true;
-                    continue; //no point looping further
-                }
-            }
-            if(!dupe_name) {
-                names[diff_ppl] = row[0];
-                diff_ppl++;
-            }
-            if(!dupe_proj) {
-                projs[diff_prj] = row[1];
-                diff_prj++;
-            }
+        Set<String> nameSet = new TreeSet<>(); //sets cant have dupes
+        Set<String> projectSet = new TreeSet<>(); //sets cant have dupes
+        for (String[] element: data) {
+          nameSet.add(element[0]);
+          projectSet.add(element[1]);
         }
 
-        Project data_projects[] = new Project[diff_prj];
-        Employee data_employees[] = new Employee[diff_ppl];
-        for(int i=0; i<diff_prj; i++) {
+        String[] names = new String[nameSet.size()];
+        String[] projs = new String[projectSet.size()];
+        int i = 0;
+        for (String x: nameSet) {
+            names[i++] = x;
+        }
+        i = 0;
+        for (String x: projectSet) {
+            projs[i++] = x;
+        }
+
+
+        Project data_projects[] = new Project[projs.length];
+        Employee data_employees[] = new Employee[names.length];
+
+        for(i=0; i<projs.length; i++) {
             data_projects[i] = new Project();
             data_projects[i].setName(projs[i]);
         }
-        for(int i=0; i<diff_ppl; i++) {
+        for(i=0; i<names.length; i++) {
             data_employees[i] = new Employee(0);
             data_employees[i].setName(names[i]);
         }
-        for(String[] row : data) {
+        for(String[] row: data) {
             for(Employee employee : data_employees) {
                 String name = employee.getName();
                 if(name.equals(row[0])) {
